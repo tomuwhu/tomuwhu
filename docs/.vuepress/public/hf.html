@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<h3><a target="_blank" href="https://hu.wikipedia.org/wiki/H%C3%A9r%C3%B3n-k%C3%A9plet">Hérón-képlet</a></h3>
+<script>
+    f = () => {
+        let a = Number(document.getElementById('a').value)
+        let b = Number(document.getElementById('b').value)
+        let c = Number(document.getElementById('c').value)
+        let s = (a + b + c) / 2
+        document.getElementById('eredm').innerHTML = 
+            `A háromszög kerülete: ${ a+b+c } cm<br>
+             A háromszög területe: ${ Math.sqrt(s*(s-a)*(s-b)*(s-c)).toFixed(2) } cm<sup>2</sup><br>`
+    }
+</script>
+<svg width="500" height="250">
+    <path d="M 200 20 l 300 200 l -450 0 l 150 -200" fill="rgba(170,220,240,20)" stroke="black"></path>
+    <text x="110" y="105" class="small">a</text>
+    <text x="350" y="105" class="small">b</text>
+    <text x="260" y="240" class="small">c</text>
+</svg>
+<br>
+a oldal hossza: <input id="a"> cm<br>
+b oldal hossza: <input id="b"> cm<br>
+c oldal hossza: <input id="c"> cm<br>
+<hr>
+<button onclick="f()">számol</button>
+<hr>
+<div id="eredm"></div>
+<style>
+    .small { 
+        font: italic 17px sans-serif; 
+    }
+    input, button, svg, div {
+        margin: 3px;
+        padding: 5px;
+        font: bold 17px sans-serif;
+        text-align: center;
+        color: blue;
+        background-color: #dee1a4;
+        border-radius: 7px;
+    }
+    input {
+        width: 80px;
+    }
+    body {
+        text-align: center;
+    }
+</style>

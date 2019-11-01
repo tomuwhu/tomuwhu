@@ -2,15 +2,17 @@
 
 [A felsőoktatási oldal itt](http://www.inf.u-szeged.hu/~tnemeth/)
 
-[CUDA Online tananyag](http://www.inf.u-szeged.hu/~vargalg/oktatas/gpgpu_19-20_1/GPGPU_peldatar/index.html)
+[JavaScript online tananyag](http://www.inf.u-szeged.hu/~tarib/projektek/344-AP4/javascript.html#valtozok-konstansok-fuggvenyek-javascript-objektumok-osztalyok-oroklodes)
 
-[UNITY Online tananyag](http://www.inf.u-szeged.hu/~vargalg/inProgress/Unity/)
+[CUDA online tananyag](http://www.inf.u-szeged.hu/~vargalg/oktatas/gpgpu_19-20_1/GPGPU_peldatar/index.html)
+
+[UNITY online tananyag](http://www.inf.u-szeged.hu/~vargalg/inProgress/Unity/)
 
 [Computer History](http://www.computinghistory.org.uk/det/5942/First-edition-of-the-ASCII-standard-was-published/)
 
 ## [ELVÁRT ALAPVETŐ ISMERETEK KÖZÉPISKOLÁSOKTÓL](http://nemes.inf.elte.hu/):
 
-- A Pascal nyelv elemei. Szintaxisábrák, BNF-jelölés. Strukturált vezérlési szerkezetek: felsorolás (szekvencia), választás (elágazás), ismétlés (ciklus).
+- 2 programozási nyelv nyelv elemei. Szintaxisábrák, BNF-jelölés. Strukturált vezérlési szerkezetek: felsorolás (szekvencia), választás (elágazás), ismétlés (ciklus).
 - Adattípusok: egész, valós, logikai, karakter, szöveg. Összetett adatok: tömb, halmaz, rekord, lista, verem, sor, fa, gráf, állomány stb. Láncolt ábrázolás.
 - Fölülről lefelé haladó programozás lépésenkénti finomítással. Programok élesztése, tesztelése,hatékonysági megfontolások.
 - Számábrázolás bináris, oktális, decimális, hexadecimális számrendszerben. Átalakítások, alapműveletek. Fixpontos és lebegőpontos ábrázolás. Pontosság, túlcsordulás.
@@ -19,4 +21,10 @@
 - Gráfalgoritmusok, gráfbejárás, fabejárás.
 - Dinamikus programozás, mohó algoritmusok, kombinatorikus algoritmusok.
 
+[MDN JavaScript referencia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+
 [Egy érettségi feladatsor](http://dload.oktatas.educatio.hu/erettsegi/feladatok_2019tavasz_emelt/e_inf_19maj_fl.pdf)
+
+[Alkalmazásfejlesztés online tananyag](http://www.inf.u-szeged.hu/~tarib/projektek/344-AP4/alkalmazasfejlesztes.html)
+
+[Algoritmizálás online tananyag](http://www.inf.u-szeged.hu/~tarib/projektek/344-AP4/algoritmusok_es_adatszerkezetek.html)
