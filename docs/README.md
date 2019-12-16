@@ -2,15 +2,25 @@
 
 [A felsőoktatási oldal itt](http://www.inf.u-szeged.hu/~tnemeth/)
 
-[JavaScript online tananyag](http://www.inf.u-szeged.hu/~tarib/projektek/344-AP4/javascript.html#valtozok-konstansok-fuggvenyek-javascript-objektumok-osztalyok-oroklodes)
+[Haladási tervezet](http://tom.uw.hu/tanmenet.html)
+
+[Computer History](http://www.computinghistory.org.uk/det/5942/First-edition-of-the-ASCII-standard-was-published/)
+
+[Tanulási segédlet 1](http://tom.uw.hu/alapismeretek.pdf)
+
+[Tanulási segédlet 2](http://tom.uw.hu/alapism2.pdf)
+
+[Excel gyakorló feladatsorok](http://tom.uw.hu/excel_gyak.zip)
+
+[Learn HTML](https://www.codecademy.com/learn/learn-html)
+
+[Google Fonts](https://developers.google.com/fonts/docs/getting_started)
 
 [CUDA online tananyag](http://www.inf.u-szeged.hu/~vargalg/oktatas/gpgpu_19-20_1/GPGPU_peldatar/index.html)
 
 [UNITY online tananyag](http://www.inf.u-szeged.hu/~vargalg/inProgress/Unity/)
 
-[Computer History](http://www.computinghistory.org.uk/det/5942/First-edition-of-the-ASCII-standard-was-published/)
-
-## [ELVÁRT ALAPVETŐ ISMERETEK KÖZÉPISKOLÁSOKTÓL](http://nemes.inf.elte.hu/):
+## [ELVÁRT ALAPVETŐ ISMERETEK KÖZÉPISKOLÁSOKTÓL](http://nemes.inf.elte.hu/)
 
 - 2 programozási nyelv nyelv elemei. Szintaxisábrák, BNF-jelölés. Strukturált vezérlési szerkezetek: felsorolás (szekvencia), választás (elágazás), ismétlés (ciklus).
 - Adattípusok: egész, valós, logikai, karakter, szöveg. Összetett adatok: tömb, halmaz, rekord, lista, verem, sor, fa, gráf, állomány stb. Láncolt ábrázolás.

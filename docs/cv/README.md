@@ -6,7 +6,7 @@
 
 ### Szakmai tapasztalat
 
-- [<b>Szegedi Tudományegyetem - Informatikai Intézet</b>](http://www.inf.u-szeged.hu/)
+- [<b>Szegedi Tudományegyetem - Informatikai Intézet</b>](https://www.inf.u-szeged.hu/algmi/munkatarsak)
   - <b>egyetemi adjunktus (2015.01.01 - től jelenleg)</b>
   - Intézetvezető helyettes - oktatási ügyek (2014.-2017.)
   - tanársegéd (2011.01.01. - 2014.12.31.)
@@ -37,6 +37,15 @@
 - Az SZTE TTIK Aranykréta-díja (2017/2018. tanév)
 - Nemzeti Tehetségprogram Pályázatok (2015., 2016., 2017.)
 - Earsmus ösztöndíj (2009.)
+
+### Szakmai tagságok
+
+- [CENTRAL-EUROPEAN JOURNAL OF NEW TECHNOLOGIES IN RESEARCH, EDUCATION AND PRACTICE](http://ojs.elte.hu/cejntrep/about/editorialTeam)
+- [Magyar Operációkutatási Társaság](http://www.mot.org.hu/tarsasag/tagsag)
+- [MTA Köztestület](https://mta.hu/koztestuleti_tagok?PersonId=10048135)
+  - Informatika- és Számítástudományi Bizottság
+  - Szegedi Területi Bizottság
+  - Informatikai Munkabizottság (szavazati jogú tag)
 
 ### Végzettségek
 
