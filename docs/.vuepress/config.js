@@ -15,6 +15,9 @@ module.exports = {
             { text: 'Fakultáció', link:'/fak.html' },
           ]
         },
+        { text: "Példaprogramok",
+          link: "/pp/" 
+        },
         { text: "CV",
           link: "/cv/" 
         }
