@@ -12,21 +12,28 @@
             >{{ elem }}</a> ]&nbsp;
             </span>
         </div>
-        <div v-else>
+        <div class="help" v-else>
             <span v-if="!ert">Ehhez a feladathoz nincs segítség megadva. Próbáljon önállóan utána nézni!</span>
         </div>
         <br>
-        Adja meg a feladatot megoldó JavaScript kódot:
-        <pre><textarea v-model="x[af]" @keyup.enter="f()" @keyup="ku"/></pre>
+        <b>Adja meg a feladatot megoldó JavaScript kódot:</b>
+        <pre class="feme"><textarea v-model="x[af]" @keyup.enter="f()" @keyup="ku"/></pre>
         <div class="right">
         <button class="xx" @click="f()">futtat</button>
         </div>
     </div>
-    <div v-else><div v-for="(mor,j) in x.slice(0, fx.length)"><pre>{{ j+1 }}. megoldás: {{ mor }}</pre></div></div>
+    <div v-else>
+        <div class="fel"><b>Megoldások:</b></div>
+        <div v-for="(mor,j) in x.slice(0, fx.length)"><pre class="mox"> {{ j+1 }}. {{ mor }}</pre></div>
+    </div>
     <hr>
-    Konzol:
+    <div class="fel">Konzol:</div>
     <div class="fmo" v-html="fe" />
-    <h2>{{ ( ( af / fx.length ) * 100 ).toFixed() }} %</h2>
+    <div v-if="!ert">
+        <table>
+            <td v-for="(x, i) in 128" :key="'iv'+i" :class="( ( af / fx.length ) * 128).toFixed()>i?'o':''" />
+        </table>
+    </div>
   </div>
 </template>
 
@@ -34,23 +41,30 @@
 var myf, mox,
     t = Array( 27 + Math.round(Math.random()*18) ).fill( 0 ).map( () =>Math.round( Math.random() * 88 ) ),
     ts = `[${ t.toString() }]`,
-    mp = 0
-
+    mp = 0,
+    s = "cica",
+    ss= "'cica'"
 export default { 
     data() { 
         return {
             fx: [
-                `Adott egy t tömb, határozza meg az elemszámát!`,
+                `Adott egy t tömb, határozza meg az elemszámát (t tömb hosszát)!`,
+                `Határozza meg a t tömb 2. elemét!`,
                 `Határozza meg a t tömbben a páratlan számok elemszámát!`,
                 `Határozza meg a t tömb elemeinek összegét!`,
                 `Határozza meg a t tömbben a páratlan értékű elemek összegét!`,
                 `Határozza meg a t tömbben a maximális elem értékét!`,
+                `Határozza meg a t tömbben a 7-tel osztható számok közül a legnagyobbat!`,
                 `Határozza meg a t tömbben az első 8 elem összegét!`,
-                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`
+                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`,
+                `Adott egy s string, határozza meg a hosszát (a karakterei számát)!`,
+                `Határozza meg s sting 3. karakterét!`,
             ],
             hint: [
                 { texts: ['Array length'],
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
+                { texts: ['JS Array'],
+                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array'] },
                 { texts: ['Array filter', '%-operator'],
                   links: [
                     'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
@@ -64,6 +78,8 @@ export default {
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'] },
                 { texts: [],
                   links: [] },
+                { texts: [],
+                  links: [] },
                 { texts: ['Array slice','Array reduce'],
                   links: [
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
@@ -75,20 +91,26 @@ export default {
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'
                   ] },
-                { texts: [],
-                  links: [] },
+                { texts: ['String length'],
+                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
+                { texts: ['String charAt'],
+                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/charAt'] },
             ],
             x: [
-                't.', 't.', 't.', 't.', '', 't.', 't.', 't.',
+                't.', '', 't.', 't.', 't.', '', '', 't.', 't.', 's.', ''
             ],
             mo: [
-                t.length, 
+                t.length,
+                t[1],
                 t.filter( v => v % 2).length, 
                 t.reduce( ( o, v ) => o += v, 0),
                 t.reduce( ( o, v ) => o += v % 2 ? v : 0, 0),
                 Math.max( ...t ),
+                Math.max( ...t.filter(v => !(v % 7) ) ),
                 t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0) 
+                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
+                s.length,
+                s[2]
             ],
             fe: '<b class="green">> </b>',
             af: 0,
@@ -110,6 +132,7 @@ export default {
             try {
                 myf=new Function (`
                     var t=${ ts }
+                    var s=${ ss }
                     return ${ this.x[this.af] }`)
                 this.fe = '<b class="green">> </b>'    
                 this.fe += `<b class="yellow">${ (mox = myf(), mox.length > 15 ? mox.slice(0,15)+"..." : mox ) }</b>`
@@ -140,13 +163,26 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|VT323&display=swap');
+td {
+    background-color: antiquewhite ;
+    width: 2px;
+    height: 20px;
+    border-radius: 4px;
+    border: none;
+    padding: 2px;
+}
+td.o {
+    background-color: rgb(143, 198, 151) ;
+}
 div.container {
     user-select: none;
 }
 div.fel {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 18px;
-    padding: 9px;
+    padding-top: 9px;
+    padding-left: 1px;
+    padding-bottom: 3px;
     text-shadow: 0px 0px 1px rgb(79, 49, 49);
 }
 div.felsz {
@@ -162,10 +198,19 @@ div.felsz {
 div.help {
     text-align: right;
 }
-pre {
-    font-size: 16px;
+pre.mox {
+    font-size: 15px;
     color:white;
     box-shadow: 1px 1px 3px black;
+    margin: 3px;
+    padding: 3px;
+}
+pre.feme {
+    font-size: 15px;
+    color:rgb(255, 255, 255);
+    box-shadow: 1px 1px 3px black;
+    margin: 3px;
+    padding: 8px;
 }
 div.fmo {
     font-size: 35px;
@@ -175,7 +220,7 @@ div.right {
     text-align: right;
 }
 textarea { 
-    width: 98%;
+    width: 99%;
     height: 100px;
     font-size: 20px;
     font-family: courier, monospace;
@@ -183,9 +228,19 @@ textarea {
     color:white;
     border:none;
 }
+textarea:focus { 
+    outline: none; 
+}
 button.xx {
     font-size: 16px;
     box-shadow: 1px 1px 3px black;
+    margin: 6px;
+    padding: 6px;
+    cursor: pointer;
+}
+button.xx:hover {
+    background-color: rgb(219, 233, 240);
+    outline: none; 
 }
 b.red {
     color: red ;
