@@ -3,7 +3,7 @@
     <br>
     <div v-if="!ert">
         <div class="fel"><b>{{ af+1 }}. feladat:</b></div>
-        <div class="felsz">{{ fx[af] }}</div>
+        <div class="felsz" v-html="fx[af]" />
         <div v-if="hint[af].texts.length" class="help">
             Segítség: 
             <span v-for="(elem, i) in hint[af].texts">
@@ -17,37 +17,71 @@
         </div>
         <br>
         <b>Adja meg a feladatot megoldó JavaScript kódot:</b>
-        <pre class="feme"><textarea v-model="x[af]" @keyup.enter="f()" @keyup="ku"/></pre>
+        <pre class="feme"><textarea class="feme" v-model="x[af]" @keyup.enter="f()" @keyup="ku"/></pre>
         <div class="right">
-        <button class="xx" @click="f()">futtat</button>
+        <button class="xx" @click="f()">futtat (kipróbál)</button>
         </div>
     </div>
     <div v-else>
         <div class="fel"><b>Megoldások:</b></div>
-        <div v-for="(mor,j) in x.slice(0, fx.length)"><pre class="mox"> {{ j+1 }}. {{ mor }}</pre></div>
+        <div v-for="(mor,j) in x.slice(0, fx.length)"><pre class="mox">{{ j+1 }}. {{ mor }}</pre></div>
     </div>
     <hr>
-    <div class="fel">Konzol:</div>
-    <div class="fmo" v-html="fe" />
     <div v-if="!ert">
+        <div class="fel">Konzol:</div>
+        <div class="fmo" v-html="fe" />
         <table>
             <td v-for="(x, i) in 128" :key="'iv'+i" :class="( ( af / fx.length ) * 128).toFixed()>i?'o':''" />
         </table>
     </div>
+    <div v-else class="fmo" style="text-align: center; color: red;">Ötös! (5-ös)</div>
   </div>
 </template>
 
 <script>
-var myf, mox,
+var myf, mox, mp = 0,
     t = Array( 27 + Math.round(Math.random()*18) ).fill( 0 ).map( () =>Math.round( Math.random() * 88 ) ),
     ts = `[${ t.toString() }]`,
-    mp = 0,
-    s = "cica",
-    ss= "'cica'"
+    s = [
+            "Bőszájú körülíróművész.",
+            "Csúszdázó műbőr különítmény",
+            "Húsz kábító fűrész őrködik, üt. (Balázsik Gábor)",
+            "Fűsújtó, sárgördítő ütés",
+            "Gyümölcsvédő ágyúfűnyíró",
+            "Háztűznézőügynök-búsító",
+            "Jóhírű tüzérágyúöntő (TSL16b)",
+            "Jóízű félárú sütőtök (TSL16b)",
+            "Jött árvíz, tűzvész, rút gümőkór.",
+            "Kövér fülű sítúrázó nő (TSL16b)",
+            "Különálló műútépítő (TSL16b)",
+            "Nyúlfülvágó térközsűrítő",
+            "Ötágú ütőműbénító (TSL16b)",
+            "Öt szép szűzlány őrült írót nyúz. (Váncsa István tollából.)",
+            "Tégy úgy őrült, már bűvölsz, hódíts! (Nagy László)",
+            "Tíz büdös légy húsz műcsótányt főz",
+            "Több hűtőházból kértünk színhúst.",
+            "Tűzön tíz órát égő nyúlfül",
+            "Sós húst sütsz tán, vízköpő Szűcsné.",
+            "Számítógépbötű-őrült nyúl. (Kolonits Zoltán)",
+            "Szénrázúdító fűtőküldönc",
+            "Szőrösfülű vén sírásó úr. (Kolonits Zoltán)",
+            "Túlkábító műrémölőfül",
+            "Tüskéshátú kígyóbűvölő (Koltai László)",
+            "Tűrő társ békít, s újból örül.",
+            "Új füvön csábító kéjnőt gyűr. (lorenzo)",
+            "Úrnőm, gyümölcsízű rágót végy!",
+            "Úszójárműkürt-vészöblítő",
+            "Üldögélő műújságíró (TSL16b)",
+            "Vájt fülű bíró két döntőt fújt. (Vincze Ferdinánd)",
+            "Zártkörű nőújító ülés (TSL16b)",
+            "Szélütött űrújságírónő"
+        ][ Math.trunc( Math.random()*32 ) ],
+    ss= `'${ s }'`, n = Math.trunc( Math.random()*13432+2341 )
 export default { 
     data() { 
         return {
             fx: [
+                `Adott egy n szám, határozza mag a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
                 `Adott egy t tömb, határozza meg az elemszámát (t tömb hosszát)!`,
                 `Határozza meg a t tömb 2. elemét!`,
                 `Határozza meg a t tömbben a páratlan számok elemszámát!`,
@@ -58,9 +92,14 @@ export default {
                 `Határozza meg a t tömbben az első 8 elem összegét!`,
                 `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`,
                 `Adott egy s string, határozza meg a hosszát (a karakterei számát)!`,
-                `Határozza meg s sting 3. karakterét!`,
+                `Határozza meg s sting 13. karakterét!`
             ],
             hint: [
+                { texts: ['Math.PI', 'Number.toFixed'],
+                  links: [
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI',
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed'
+                  ] },
                 { texts: ['Array length'],
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
                 { texts: ['JS Array'],
@@ -97,9 +136,10 @@ export default {
                   links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/charAt'] },
             ],
             x: [
-                't.', '', 't.', 't.', 't.', '', '', 't.', 't.', 's.', ''
+                '', 't.', '', 't.', 't.', 't.', '', '', 't.', 't.', 's.', ''
             ],
             mo: [
+                (Math.PI * n).toFixed(2),
                 t.length,
                 t[1],
                 t.filter( v => v % 2).length, 
@@ -110,7 +150,7 @@ export default {
                 t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
                 t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
                 s.length,
-                s[2]
+                s[12]
             ],
             fe: '<b class="green">> </b>',
             af: 0,
@@ -131,8 +171,9 @@ export default {
         f() {
             try {
                 myf=new Function (`
-                    var t=${ ts }
-                    var s=${ ss }
+                    var t = ${ ts }
+                    var s = ${ ss }
+                    var n = ${ n }
                     return ${ this.x[this.af] }`)
                 this.fe = '<b class="green">> </b>'    
                 this.fe += `<b class="yellow">${ (mox = myf(), mox.length > 15 ? mox.slice(0,15)+"..." : mox ) }</b>`
@@ -142,7 +183,7 @@ export default {
                 this.fe += `<b class="red">${ error }</b>`
                 setTimeout( () => this.fe = `<b class="green">> </b> `, 15000 )
             }
-            if ( mox  === this.mo[this.af]) {
+            if ( mox  == this.mo[this.af]) {
                 mp=0
                 this.af++
                 if (this.af===this.fx.length) {
@@ -207,10 +248,12 @@ pre.mox {
 }
 pre.feme {
     font-size: 15px;
-    color:rgb(255, 255, 255);
     box-shadow: 1px 1px 3px black;
     margin: 3px;
     padding: 8px;
+}
+textarea.feme {
+    color:rgb(249, 242, 192);
 }
 div.fmo {
     font-size: 35px;
@@ -237,6 +280,8 @@ button.xx {
     margin: 6px;
     padding: 6px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
 }
 button.xx:hover {
     background-color: rgb(219, 233, 240);
