@@ -17,21 +17,31 @@
         </div>
         <br>
         <b>Adja meg a feladatot megoldó JavaScript kódot:</b>
-        <pre class="feme"><textarea class="feme" v-model="x[af]" @keyup.enter="f()" @keyup="ku"/></pre>
+        <pre class="feme"><textarea class="feme" v-model="x[af]" /></pre>
         <div class="right">
+        <button class="xx" @click="ku(38)" title="előző megoldás">&lArr;</button>
+        <button class="xx" @click="ku(40)" title="következő megoldás">&rArr;</button> 
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         <button class="xx" @click="f()">futtat (kipróbál)</button>
         </div>
     </div>
     <div v-else>
         <div class="fel"><b>Megoldások:</b></div>
-        <div v-for="(mor,j) in x.slice(0, fx.length)"><pre class="mox">{{ j+1 }}. {{ mor }}</pre></div>
+        <table style="width: 120%;">
+            <tr v-for="(mor,j) in x.slice(0, fx.length)">
+                <th class="right">{{ j+1 }}.</th>
+                <td style="width: 92%;">
+                    <pre class="mox">{{ mor }}</pre>
+                </td>
+            </tr>
+        </table>
     </div>
     <hr>
     <div v-if="!ert">
         <div class="fel">Konzol:</div>
         <div class="fmo" v-html="fe" />
         <table>
-            <td v-for="(x, i) in 128" :key="'iv'+i" :class="( ( af / fx.length ) * 128).toFixed()>i?'o':''" />
+            <td v-for="(x, i) in 42" :key="'iv'+i" :class="( ( af / fx.length ) * 42).toFixed()>i?'o':''" />
         </table>
     </div>
     <div v-else class="fmo" style="text-align: center; color: red;">Ötös! (5-ös)</div>
@@ -81,9 +91,12 @@ export default {
     data() { 
         return {
             fx: [
-                `Adott egy n szám, határozza mag a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
-                `Adott egy t tömb, határozza meg az elemszámát (t tömb hosszát)!`,
-                `Határozza meg a t tömb 2. elemét!`,
+                `Adott egy n szám ( <code>var n = ...</code> ).<br>
+                 Határozza mag a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
+                `Adott egy s string, határozza meg a hosszát (a karakterei számát)!`,
+                `Határozza meg s sting 13. karakterét!`,
+                `Adott egy t tömb ( <code>var t = [...]</code> ), határozza meg az elemszámát (t tömb hosszát)!`,
+                `Határozza meg a t tömb 2. elemét!<br>(A tömb 1. eleme: <code>t[0]</code> )`,
                 `Határozza meg a t tömbben a páratlan számok elemszámát!`,
                 `Határozza meg a t tömb elemeinek összegét!`,
                 `Határozza meg a t tömbben a páratlan értékű elemek összegét!`,
@@ -91,8 +104,7 @@ export default {
                 `Határozza meg a t tömbben a 7-tel osztható számok közül a legnagyobbat!`,
                 `Határozza meg a t tömbben az első 8 elem összegét!`,
                 `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`,
-                `Adott egy s string, határozza meg a hosszát (a karakterei számát)!`,
-                `Határozza meg s sting 13. karakterét!`
+                `Határozza meg s string szavainak számát!`
             ],
             hint: [
                 { texts: ['Math.PI', 'Number.toFixed'],
@@ -100,6 +112,10 @@ export default {
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed'
                   ] },
+                { texts: ['String length'],
+                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
+                { texts: ['String charAt'],
+                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/charAt'] },
                 { texts: ['Array length'],
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
                 { texts: ['JS Array'],
@@ -130,16 +146,18 @@ export default {
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'
                   ] },
-                { texts: ['String length'],
-                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
-                { texts: ['String charAt'],
-                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/charAt'] },
+                { texts: ['String split'],
+                  links: [
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split'
+                  ] }
             ],
             x: [
-                '', 't.', '', 't.', 't.', 't.', '', '', 't.', 't.', 's.', ''
+                'n * 2', 's.', '', 't.', '1', 't.', 't.', 't.', '', '', 't.', 't.'
             ],
             mo: [
                 (Math.PI * n).toFixed(2),
+                s.length,
+                s[12],
                 t.length,
                 t[1],
                 t.filter( v => v % 2).length, 
@@ -149,8 +167,7 @@ export default {
                 Math.max( ...t.filter(v => !(v % 7) ) ),
                 t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
                 t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                s.length,
-                s[12]
+                s.split(" ").length
             ],
             fe: '<b class="green">> </b>',
             af: 0,
@@ -158,23 +175,24 @@ export default {
         } 
     },
     methods: {
-        ku ( event ) {
-            if (event.keyCode === 38 && this.af>0 && this.af-mp >= 1) {
+        ku ( kk ) {
+            if (kk === 38 && this.af>0 && this.af-mp >= 1) {
                 mp++
                 this.$set( this.x,this.af,this.x[this.af-mp] )
             }
-            if (event.keyCode === 40 && this.af>0) {
+            if (kk === 40 && this.af>0) {
                 mp--
                 this.$set( this.x,this.af,this.x[this.af-mp] )
             }
         },
         f() {
             try {
+                let ret = this.x[this.af].includes('return') ? '' : 'return '
                 myf=new Function (`
                     var t = ${ ts }
                     var s = ${ ss }
                     var n = ${ n }
-                    return ${ this.x[this.af] }`)
+                    ${ ret }${ this.x[this.af] }`)
                 this.fe = '<b class="green">> </b>'    
                 this.fe += `<b class="yellow">${ (mox = myf(), mox.length > 15 ? mox.slice(0,15)+"..." : mox ) }</b>`
                 setTimeout( () => this.fe = `<b class="green">> </b> `, 15000 )
@@ -205,15 +223,33 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|VT323&display=swap');
 td {
-    background-color: antiquewhite ;
-    width: 2px;
+    background-color: rgb(255, 245, 213);
+    width: 8px;
     height: 20px;
     border-radius: 4px;
     border: none;
     padding: 2px;
+    box-shadow: 0px 0px 1px rgb(147, 183, 186);
+    padding: 3px;
+}
+th.right {
+    text-align: right;
+    width: 20px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    background-color: white;
+    vertical-align: top;
+    padding-top: 13px;
+    color:rgb(255, 247, 133);
+    text-shadow: 0px 0px 2px black;
 }
 td.o {
     background-color: rgb(143, 198, 151) ;
+}
+table { 
+    border-spacing: 4px;
+    border-collapse: separate;
 }
 div.container {
     user-select: none;
@@ -231,7 +267,9 @@ div.felsz {
     font-size: 18px;
     margin: 5px;
     padding: 9px;
-    background-color: antiquewhite;
+    padding-top: 17px;
+    padding-bottom: 9px;
+    background-color: rgb(255, 245, 213);
     box-shadow: 1px 1px 3px black;
     border-radius: 5px;
     text-shadow: 0px 0px 2px rgb(60, 48, 1);

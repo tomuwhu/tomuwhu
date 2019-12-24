@@ -1,4 +1,11 @@
 module.exports = {
+    locales: {
+      '/': {
+        lang: 'hu-HU', // this will be set as the lang attribute on <html>
+        title: 'VuePress',
+        description: 'tomuwhu oldal'
+      }
+    },
     title: "Dr. Németh Tamás",
     description: "Dr. Németh Tamás oktatási weboldal - közoktatás",
     head: [
