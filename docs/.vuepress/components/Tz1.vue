@@ -27,10 +27,10 @@
     </div>
     <div v-else>
         <div class="fel"><b>Megoldások:</b></div>
-        <table style="width: 120%;">
+        <table class="mt">
             <tr v-for="(mor,j) in x.slice(0, fx.length)">
                 <th class="right">{{ j+1 }}.</th>
-                <td style="width: 92%;">
+                <td style="width: 92%;" class="mt">
                     <pre class="mox">{{ mor }}</pre>
                 </td>
             </tr>
@@ -40,8 +40,11 @@
     <div v-if="!ert">
         <div class="fel">Konzol:</div>
         <div class="fmo" v-html="fe" />
-        <table>
-            <td v-for="(x, i) in 42" :key="'iv'+i" :class="( ( af / fx.length ) * 42).toFixed()>i?'o':''" />
+        <table class="mt">
+            <td v-for="(x, i) in 42" 
+                :key="'iv'+i"
+                class="mt"
+                :id="( ( af / fx.length ) * 42).toFixed()>i?'o':''" />
         </table>
     </div>
     <div v-else class="fmo" style="text-align: center; color: red;">Ötös! (5-ös)</div>
@@ -222,7 +225,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|VT323&display=swap');
-td {
+td.mt {
     background-color: rgb(255, 245, 213);
     width: 8px;
     height: 20px;
@@ -244,10 +247,11 @@ th.right {
     color:rgb(255, 247, 133);
     text-shadow: 0px 0px 2px black;
 }
-td.o {
+td#o {
     background-color: rgb(143, 198, 151) ;
 }
-table { 
+table.mt {
+    width: 120%;
     border-spacing: 4px;
     border-collapse: separate;
 }
@@ -300,7 +304,7 @@ div.fmo {
 div.right {
     text-align: right;
 }
-textarea { 
+textarea.feme { 
     width: 99%;
     height: 100px;
     font-size: 20px;
@@ -309,7 +313,7 @@ textarea {
     color:white;
     border:none;
 }
-textarea:focus { 
+textarea.feme:focus { 
     outline: none; 
 }
 button.xx {
@@ -336,7 +340,7 @@ b.green {
 b.yellow {
     color: rgb(115, 45, 194) ;
 }
-h2 {
+h2.mt {
     font-family: 'VT323', monospace;
     font-size: 30px;
     color: rgb(33, 92, 62) ;
