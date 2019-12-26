@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <br>
-    <div v-if="!ert">
+    <div v-if="!ert && time < 42">
         <div class="fel"><b>{{ af+1 }}. feladat:</b></div>
         <div class="felsz" v-html="fx[af]" />
-        <div v-if="hint[af].texts.length" class="help">
-            Segítség: 
+        <div v-if="hint[af] && hint[af].texts.length" class="help">
+            <span @click="help()" id="help">Segítség</span>: 
             <span v-for="(elem, i) in hint[af].texts">
             [ <a :href="hint[af].links[i]"        
                  target="help"
@@ -26,13 +26,16 @@
         </div>
     </div>
     <div v-else>
+        
         <div class="fel"><b>Megoldások:</b></div>
         <table class="mt">
-            <tr v-for="(mor,j) in x.slice(0, fx.length)">
-                <th class="right">{{ j+1 }}.</th>
+            <tr v-for="mor in mot">
+                <th class="right">{{ mor.fs+1 }}.</th>
                 <td style="width: 92%;" class="mt">
-                    <pre class="mox">{{ mor }}</pre>
+                    <pre class="mox">{{ mor.ms }}</pre>
                 </td>
+                <th class="right"> {{ (mor.time/1000).toFixed(0) }} &nbsp;
+                </th>
             </tr>
         </table>
     </div>
@@ -46,13 +49,19 @@
                 class="mt"
                 :id="( ( af / fx.length ) * 42).toFixed()>i?'o':''" />
         </table>
+        <table class="mt">
+            <td v-for="(x, i) in 42" 
+                :key="'iv'+i"
+                class="mt"
+                :id="42-time < i ? 'r' : 'o'" />
+        </table>
     </div>
     <div v-else class="fmo" style="text-align: center; color: red;">Ötös! (5-ös)</div>
   </div>
 </template>
 
 <script>
-var myf, mox, mp = 0,
+var myf, mox, mp = 0, mpt, nt,
     t = Array( 27 + Math.round(Math.random()*18) ).fill( 0 ).map( () =>Math.round( Math.random() * 88 ) ),
     ts = `[${ t.toString() }]`,
     s = [
@@ -93,6 +102,7 @@ var myf, mox, mp = 0,
 export default { 
     data() { 
         return {
+            utime: new Date,
             fx: [
                 `Adott egy n szám ( <code>var n = ...</code> ).<br>
                  Határozza mag a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
@@ -154,8 +164,16 @@ export default {
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split'
                   ] }
             ],
-            x: [
-                'n * 2', 's.', '', 't.', '1', 't.', 't.', 't.', '', '', 't.', 't.'
+            x: [],
+            xhelp: [
+                '( Math.PI * 2 * n ).toFixed( 3 )', 's[0] + s.length + 1', 's.charAt(12) === s[12] ? `o` : `ó` ',
+                '"Life, the universe and everything. Answer:".length',
+                'alert( t[0] )', 't.filter( v => v % 3)', 't.reduce( ( o, v ) => o *= v, 1)',
+                't.reduce( ( o, v ) => o += v % 2 ? 0 : v, 0)', 'Math.min( ...t )',
+                'Math.min( ...t.filter(v => !(v % 5) ) )', 
+                't.slice( 0, 4 ).reduce( ( o, v ) => o += v, 0)',
+                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += v, 0)`,
+                `s.split('')`
             ],
             mo: [
                 (Math.PI * n).toFixed(2),
@@ -172,59 +190,98 @@ export default {
                 t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
                 s.split(" ").length
             ],
+            mot: [],
             fe: '<b class="green">> </b>',
             af: 0,
-            ert: false
-        } 
+            ert: false,
+            time: 0
+        }
     },
     methods: {
+        help() {
+            this.$set( this.x, this.af, this.xhelp[this.af] )
+        },
         ku ( kk ) {
+            if (mp === 0) mpt = this.x[this.af-mp]
             if (kk === 38 && this.af>0 && this.af-mp >= 1) {
                 mp++
                 this.$set( this.x,this.af,this.x[this.af-mp] )
             }
-            if (kk === 40 && this.af>0) {
+            if (kk === 40 && this.af>0 && mp > 0) {
                 mp--
                 this.$set( this.x,this.af,this.x[this.af-mp] )
             }
+            if (mp === 0) this.x[this.af-mp] = mpt
         },
         f() {
             try {
-                let ret = this.x[this.af].includes('return') ? '' : 'return '
-                myf=new Function (`
-                    var t = ${ ts }
-                    var s = ${ ss }
-                    var n = ${ n }
-                    ${ ret }${ this.x[this.af] }`)
-                this.fe = '<b class="green">> </b>'    
-                this.fe += `<b class="yellow">${ (mox = myf(), mox.length > 15 ? mox.slice(0,15)+"..." : mox ) }</b>`
-                setTimeout( () => this.fe = `<b class="green">> </b> `, 15000 )
+                if (this.x[this.af]) {
+                    let ret = this.x[this.af].includes('return') ? '' : 'return '
+                    myf=new Function (`
+                        var t = ${ ts }
+                        var s = ${ ss }
+                        var n = ${ n }
+                        ${ ret }${ this.x[this.af] }`)
+                    this.fe = '<b class="green">> </b>'    
+                    this.fe += `<b class="yellow">${ 
+                        (mox = myf(), mox && mox.length > 15 
+                            ? mox.slice(0,15)+"..."
+                            : mox == undefined ? "" : mox ) 
+                    }</b>`
+                    setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
+                } else {
+                    this.fe = '<b class="green">> </b>'
+                    this.fe = `<b class="green">Nincs kiszámolt érték</b>`
+                    setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
+                }
             } catch( error ) {
                 this.fe = '<b class="green">> </b>'    
                 this.fe += `<b class="red">${ error }</b>`
-                setTimeout( () => this.fe = `<b class="green">> </b> `, 15000 )
+                setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
             }
             if ( mox  == this.mo[this.af]) {
                 mp=0
+                nt = new Date
+                this.mot.push({
+                    fs: this.af,
+                    ms: this.x[this.af],
+                    mo: this.mo[this.af],
+                    time: nt - this.utime
+                })
+                this.utime = new Date
                 this.af++
-                if (this.af===this.fx.length) {
+                if (this.fx && this.af===this.fx.length) {
                     this.fe = '<b class="green">> </b>'    
                     this.fe += `<b class="green">Gratulálok az összes feladatot megoldotta!</b>`
-                    setTimeout( () => this.fe = `<b class="green">> </b> `, 15000 )
+                    setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
                     this.ert = true
                 } else {
                     this.fe = '<b class="green">> </b>'    
                     this.fe += ` <b class="green"> Jó megoldás! Új feladat!</b>`
-                    setTimeout( () => this.fe = `<b class="green">> </b> `, 15000 )
+                    setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
                 }
             }
         }
+    },
+    mounted() {
+        this.utime = new Date
+        setInterval( () => this.time++, 600 )
     }
 }
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|VT323&display=swap');
+span#help {
+    cursor: pointer;
+}
+span#help:hover {
+    color:rgb(74, 136, 132) ;
+    text-shadow: 1px 1px 2px rgb(96, 86, 86);
+}
+span#help:active {
+    text-shadow: 0px 0px 2px rgb(96, 86, 86);
+}
 td.mt {
     background-color: rgb(255, 245, 213);
     width: 8px;
@@ -244,11 +301,13 @@ th.right {
     background-color: white;
     vertical-align: top;
     padding-top: 13px;
-    color:rgb(255, 247, 133);
-    text-shadow: 0px 0px 2px black;
+    color:rgb(36, 35, 19);
 }
 td#o {
     background-color: rgb(143, 198, 151) ;
+}
+td#r {
+    background-color: rgb(242, 212, 212) ;
 }
 table.mt {
     width: 120%;
