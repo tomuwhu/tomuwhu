@@ -1,67 +1,95 @@
 <template>
   <div class="container">
     <br>
-    <div v-if="!ert && time < 42">
-        <div class="fel"><b>{{ af+1 }}. feladat:</b></div>
-        <div class="felsz" v-html="fx[af]" />
-        <div v-if="hint[af] && hint[af].texts.length" class="help">
-            <span @click="help()" id="help">Segítség</span>: 
-            <span v-for="(elem, i) in hint[af].texts">
-            [ <a :href="hint[af].links[i]"        
-                 target="help"
-            >{{ elem }}</a> ]&nbsp;
-            </span>
-        </div>
-        <div class="help" v-else>
-            <span v-if="!ert">Ehhez a feladathoz nincs segítség megadva. Próbáljon önállóan utána nézni!</span>
-        </div>
-        <br>
-        <b>Adja meg a feladatot megoldó JavaScript kódot:</b>
-        <pre class="feme"><textarea class="feme" v-model="x[af]" /></pre>
-        <div class="right">
-        <button class="xx" @click="ku(38)" title="előző megoldás">&lArr;</button>
-        <button class="xx" @click="ku(40)" title="következő megoldás">&rArr;</button> 
-        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        <button class="xx" @click="f()">futtat (kipróbál)</button>
+    <div v-if="!name.length" class="center">
+        <div class="fel">Adja meg a nevét: 
+            <input v-model="setname" @keyup.enter="start()">
+            <button class="xx" @click="start()">Kezdés</button>
         </div>
     </div>
     <div v-else>
-        
-        <div class="fel"><b>Megoldások:</b></div>
-        <table class="mt">
-            <tr v-for="mor in mot">
-                <th class="right">{{ mor.fs+1 }}.</th>
-                <td style="width: 92%;" class="mt">
-                    <pre class="mox">{{ mor.ms }}</pre>
-                </td>
-                <th class="right"> {{ (mor.time/1000).toFixed(0) }} &nbsp;
-                </th>
-            </tr>
-        </table>
+        <div class="right">{{ name }}</div>
+        <div v-if="!ert && time < 42">
+            <div class="fel"><b>{{ af+1 }}. feladat:</b></div>
+            <div class="felsz" v-html="fx[af]" />
+            <div v-if="hint[af] && hint[af].texts.length" class="help">
+                <span v-if="xhelp[af].length" @click="help()" id="help">Segítség</span>
+                <span v-else>Segítség</span>:
+                <span v-for="(elem, i) in hint[af].texts">
+                [ <a :href="hint[af].links[i]"        
+                    target="help"
+                >{{ elem }}</a> ]&nbsp;
+                </span>
+            </div>
+            <div class="help" v-else>
+                <span v-if="xhelp[af].length" @click="help()" id="help">Segítség</span>
+                <span v-else>Segítség</span>:
+                <span v-if="!ert">Ehhez a feladathoz nincs hivatkozás megadva!</span>
+            </div>
+            <br>
+            <b>Adja meg a feladatot megoldó JavaScript kódot:</b>
+            <pre class="feme"><textarea class="feme" v-model="x[af]" /></pre>
+            <div class="right">
+            <button class="xx" @click="ku(38)" title="előző megoldás">&lArr;</button>
+            <button class="xx" @click="ku(40)" title="következő megoldás">&rArr;</button> 
+            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            <button class="xx" @click="f()">futtat (kipróbál)</button>
+            </div>
+        </div>
+        <div v-else>
+            <div class="fel"><b>Megoldások:</b></div>
+            <table class="mt">
+                <tr v-for="mor in mot">
+                    <th class="right">{{ mor.fs+1 }}.</th>
+                    <td style="width: 92%;" class="mt">
+                        <pre class="mox">{{ mor.ms }}</pre>
+                    </td>
+                    <th class="right"> {{ (mor.time/1000).toFixed(0) }} &nbsp;
+                    </th>
+                </tr>
+            </table>
+            <div class="fmo center" >
+                {{(mot.length / fx.length * 100).toFixed(0)}} %
+                <div v-if="(mot.length / fx.length) >= 0.85">
+                    Ötös! (5-ös)
+                </div>
+                <div v-else-if="(mot.length / fx.length) >= 0.7">
+                    Négyes (4-es).
+                </div>
+                <div v-else-if="(mot.length / fx.length) >= 0.55">
+                    Hármas (3-as).
+                </div>
+                <div v-else-if="(mot.length / fx.length) >= 0.4">
+                    Kettes (2-es).
+                </div>
+                <div v-else>
+                    Egyes sajnos (1-es), karó, bocs.
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div v-if="!ert && time < 42">
+            <div class="fel">Konzol:</div>
+            <div class="fmo" v-html="fe" />
+            <table class="mt">
+                <td v-for="(x, i) in 42" 
+                    :key="'iv'+i"
+                    class="mt"
+                    :id="( ( af / fx.length ) * 42).toFixed()>i?'o':''" />
+            </table>
+            <table class="mt">
+                <td v-for="(x, i) in 42" 
+                    :key="'iv'+i"
+                    class="mt"
+                    :id="42-time < i ? 'r' : 'o'" />
+            </table>
+        </div>
     </div>
-    <hr>
-    <div v-if="!ert">
-        <div class="fel">Konzol:</div>
-        <div class="fmo" v-html="fe" />
-        <table class="mt">
-            <td v-for="(x, i) in 42" 
-                :key="'iv'+i"
-                class="mt"
-                :id="( ( af / fx.length ) * 42).toFixed()>i?'o':''" />
-        </table>
-        <table class="mt">
-            <td v-for="(x, i) in 42" 
-                :key="'iv'+i"
-                class="mt"
-                :id="42-time < i ? 'r' : 'o'" />
-        </table>
-    </div>
-    <div v-else class="fmo" style="text-align: center; color: red;">Ötös! (5-ös)</div>
   </div>
 </template>
 
 <script>
-var myf, mox, mp = 0, mpt, nt,
+var sec = 60000, myf, mox, mp = 0, mpt, nt,
     t = Array( 27 + Math.round(Math.random()*18) ).fill( 0 ).map( () =>Math.round( Math.random() * 88 ) ),
     ts = `[${ t.toString() }]`,
     s = [
@@ -103,6 +131,7 @@ export default {
     data() { 
         return {
             utime: new Date,
+            name: '', setname: '',
             fx: [
                 `Adott egy n szám ( <code>var n = ...</code> ).<br>
                  Határozza mag a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
@@ -166,14 +195,14 @@ export default {
             ],
             x: [],
             xhelp: [
-                '( Math.PI * 2 * n ).toFixed( 3 )', 's[0] + s.length + 1', 's.charAt(12) === s[12] ? `o` : `ó` ',
-                '"Life, the universe and everything. Answer:".length',
-                'alert( t[0] )', 't.filter( v => v % 3)', 't.reduce( ( o, v ) => o *= v, 1)',
-                't.reduce( ( o, v ) => o += v % 2 ? 0 : v, 0)', 'Math.min( ...t )',
-                'Math.min( ...t.filter(v => !(v % 5) ) )', 
+                '( Math.PI * 2 * n ).toFixed( 3 )', 's[12] + s.length', 's[12] + s.length',
+                't[2] + t.length',
+                't[2] + t.length', 't.filter( v => true )', 't.reduce( ( o, v ) => o += 1, 0)',
+                't.reduce( ( o, v ) => o += v % 2 ? 1 : 0, 0)', 'Math.min( ...t )',
+                'Math.max( ...t.filter( v => !(v % 2) ) )', 
                 't.slice( 0, 4 ).reduce( ( o, v ) => o += v, 0)',
-                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += v, 0)`,
-                `s.split('')`
+                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += 1, 0)`,
+                `s.split(' ')`
             ],
             mo: [
                 (Math.PI * n).toFixed(2),
@@ -198,6 +227,12 @@ export default {
         }
     },
     methods: {
+        //'"Life, the universe and everything. Answer:".length'
+        start() {
+            this.name  = this.setname
+            this.utime = new Date
+            setInterval( () => this.time++, sec )
+        },
         help() {
             this.$set( this.x, this.af, this.xhelp[this.af] )
         },
@@ -231,7 +266,7 @@ export default {
                     setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
                 } else {
                     this.fe = '<b class="green">> </b>'
-                    this.fe = `<b class="green">Nincs kiszámolt érték</b>`
+                    this.fe = `<b class="green">> Nincs kiszámolt érték</b>`
                     setTimeout( () => this.fe = `<b class="green">> </b> `, 2000 )
                 }
             } catch( error ) {
@@ -262,16 +297,21 @@ export default {
                 }
             }
         }
-    },
-    mounted() {
-        this.utime = new Date
-        setInterval( () => this.time++, 600 )
     }
 }
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|VT323&display=swap');
+input {
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: rgb(255, 253, 219);
+    margin: 4px;
+    padding: 5px;
+    color:rgb(12, 65, 73);
+}
 span#help {
     cursor: pointer;
 }
@@ -291,6 +331,9 @@ td.mt {
     padding: 2px;
     box-shadow: 0px 0px 1px rgb(147, 183, 186);
     padding: 3px;
+}
+td.c {
+    background-color: rgb(255, 77, 77);
 }
 th.right {
     text-align: right;
@@ -359,9 +402,13 @@ textarea.feme {
 div.fmo {
     font-size: 35px;
     font-family: 'VT323', monospace;
+    color: red;
 }
 div.right {
     text-align: right;
+}
+div.center {
+    text-align: center; 
 }
 textarea.feme { 
     width: 99%;
@@ -411,5 +458,4 @@ h2.h2x {
     text-align: center;
     text-shadow: 0px 0px 3px rgb(65, 79, 77);
 }
-
 </style>
