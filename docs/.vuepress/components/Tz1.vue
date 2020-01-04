@@ -139,14 +139,14 @@ export default {
                 `Határozza meg s sting 13. karakterét!`,
                 `Adott egy t tömb ( <code>var t = [...]</code> ), határozza meg az elemszámát (t tömb hosszát)!`,
                 `Határozza meg a t tömb 2. elemét!<br>(A tömb 1. eleme: <code>t[0]</code> )`,
+                `Határozza meg s string szavainak számát!`,
                 `Határozza meg a t tömbben a páratlan számok elemszámát!`,
                 `Határozza meg a t tömb elemeinek összegét!`,
                 `Határozza meg a t tömbben a páratlan értékű elemek összegét!`,
                 `Határozza meg a t tömbben a maximális elem értékét!`,
                 `Határozza meg a t tömbben a 7-tel osztható számok közül a legnagyobbat!`,
                 `Határozza meg a t tömbben az első 8 elem összegét!`,
-                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`,
-                `Határozza meg s string szavainak számát!`
+                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`
             ],
             hint: [
                 { texts: ['Math.PI', 'Number.toFixed'],
@@ -162,6 +162,10 @@ export default {
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
                 { texts: ['JS Array'],
                   links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array'] },
+                { texts: ['String split'],
+                  links: [
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split'
+                  ] },
                 { texts: ['Array filter', '%-operator'],
                   links: [
                     'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
@@ -173,8 +177,9 @@ export default {
                     'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder'] },
                 { texts: ['Array reduce'],
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'] },
-                { texts: [],
-                  links: [] },
+                { texts: ['Array reduce','Math.max'],
+                  links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce',
+                          'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max'] },
                 { texts: [],
                   links: [] },
                 { texts: ['Array slice','Array reduce'],
@@ -187,37 +192,25 @@ export default {
                       'https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array/sort',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'
-                  ] },
-                { texts: ['String split'],
-                  links: [
-                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split'
                   ] }
             ],
             x: [],
             xhelp: [
                 '( Math.PI * 2 * n ).toFixed( 3 )', 's[12] + s.length', 's[12] + s.length',
-                't[2] + t.length',
-                't[2] + t.length', 't.filter( v => true )', 't.reduce( ( o, v ) => o += 1, 0)',
+                't[2] + t.length', 't[2] + t.length', `s.split(' ')`,
+                't.filter( v => true )', 't.reduce( ( o, v ) => o += 1, 0)',
                 't.reduce( ( o, v ) => o += v % 2 ? 1 : 0, 0)', 'Math.min( ...t )',
                 'Math.max( ...t.filter( v => !(v % 2) ) )', 
                 't.slice( 0, 4 ).reduce( ( o, v ) => o += v, 0)',
-                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += 1, 0)`,
-                `s.split(' ')`
+                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += 1, 0)`
             ],
             mo: [
-                (Math.PI * n).toFixed(2),
-                s.length,
-                s[12],
-                t.length,
-                t[1],
-                t.filter( v => v % 2).length, 
-                t.reduce( ( o, v ) => o += v, 0),
+                (Math.PI * n).toFixed(2), s.length, s[12], t.length, t[1], s.split(" ").length,
+                t.filter( v => v % 2).length,  t.reduce( ( o, v ) => o += v, 0),
                 t.reduce( ( o, v ) => o += v % 2 ? v : 0, 0),
-                Math.max( ...t ),
-                Math.max( ...t.filter(v => !(v % 7) ) ),
+                Math.max( ...t ), Math.max( ...t.filter(v => !(v % 7) ) ),
                 t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                s.split(" ").length
+                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0)
             ],
             mot: [],
             fe: '<b class="green">> </b>',
