@@ -12,8 +12,12 @@
         <div v-if="!ert && time < 42">
             <div class="fel"><b>{{ af+1 }}. feladat:</b></div>
             <div class="felsz" v-html="fx[af]" />
+            <br>
             <div v-if="hint[af] && hint[af].texts.length" class="help">
-                <span v-if="xhelp[af].length" @click="help()" id="help">Segítség</span>
+                <span v-if="xhelp[af].length" id="help">
+                  <b id="h" @click="help()">Példa betöltése</b>
+                  További súgók
+                </span>
                 <span v-else>Segítség</span>:
                 <span v-for="(elem, i) in hint[af].texts">
                 [ <a :href="hint[af].links[i]"        
@@ -22,7 +26,7 @@
                 </span>
             </div>
             <div class="help" v-else>
-                <span v-if="xhelp[af].length" @click="help()" id="help">Segítség</span>
+                <span v-if="xhelp[af].length" @click="help()" id="help"><b id="h">Példa betöltése</b></span>
                 <span v-else>Segítség</span>:
                 <span v-if="!ert">Ehhez a feladathoz nincs hivatkozás megadva!</span>
             </div>
@@ -146,7 +150,9 @@ export default {
                 `Határozza meg a t tömbben a maximális elem értékét!`,
                 `Határozza meg a t tömbben a 7-tel osztható számok közül a legnagyobbat!`,
                 `Határozza meg a t tömbben az első 8 elem összegét!`,
-                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`
+                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`,
+                `Határozza meg a t tömbben az 5 legnagyobb, 2-vel osztható szám szorzatát!`,
+                `Határozza meg a t tömbben az 5. és 7. legnagyobb páratlan szám szorzatát!`
             ],
             hint: [
                 { texts: ['Math.PI', 'Number.toFixed'],
@@ -192,17 +198,29 @@ export default {
                       'https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array/sort',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'
+                  ] },
+                { texts: ['Array filter', 'Array sort', 'Array slice', 'Array reduce'],
+                  links: [
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
+                      'https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array/sort',
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice',
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'
+                  ] },
+                  { texts: ['Array sort'],
+                  links: [
+                      'https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array/sort',
                   ] }
             ],
             x: [],
             xhelp: [
-                '( Math.PI * 2 * n ).toFixed( 3 )', 's[12] + s.length', 's[12] + s.length',
-                't[2] + t.length', 't[2] + t.length', `s.split(' ')`,
-                't.filter( v => true )', 't.reduce( ( o, v ) => o += 1, 0)',
-                't.reduce( ( o, v ) => o += v % 2 ? 1 : 0, 0)', 'Math.min( ...t )',
+                '( Math.PI * 2 * n ).toFixed( 12 )', 's[12] + s.length', 's[12] + s.length',
+                't[2] + t.length', 't[2] + t.length', `s.split('á').length`,
+                't.filter( v => v == 2 )', 't.reduce( ( o, v ) => o += v + 1, 0)',
+                't.reduce( ( o, v ) => o += v % 2 ? v : 1, 1)', 'Math.min( ...t )',
                 'Math.max( ...t.filter( v => !(v % 2) ) )', 
-                't.slice( 0, 4 ).reduce( ( o, v ) => o += v, 0)',
-                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += 1, 0)`
+                't.slice( 0, 4 )\n .reduce( ( o, v ) => o += v + 1, 0)',
+                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += 1, 0)`,
+                `t.`, `t.`
             ],
             mo: [
                 (Math.PI * n).toFixed(2), s.length, s[12], t.length, t[1], s.split(" ").length,
@@ -210,7 +228,9 @@ export default {
                 t.reduce( ( o, v ) => o += v % 2 ? v : 0, 0),
                 Math.max( ...t ), Math.max( ...t.filter(v => !(v % 7) ) ),
                 t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0)
+                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
+                t.filter(v => v % 2).sort( ( a, b ) => b - a ).slice( 0, 5 ).reduce( ( o, v ) => o *= v, 1),
+                t.sort( ( a, b ) => b - a )[4]*t.sort( ( a, b ) => b - a )[6]
             ],
             mot: [],
             fe: '<b class="green">> </b>',
@@ -295,6 +315,22 @@ export default {
 </script>
 
 <style>
+b#h {
+    border:solid 1px black;
+    border-radius: 6px;
+    margin: 8px;
+    padding: 4px;
+    background-color: beige;
+    box-shadow: 1px 1px 3px black;
+    cursor: pointer;
+}
+b#h:hover {
+    color:rgb(49, 73, 72) ;
+    text-shadow: 0px 0px 2px rgb(96, 86, 86);
+}
+b#h:active {
+    text-shadow: 1px 1px 2px rgb(96, 86, 86);
+}
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|VT323&display=swap');
 input {
     text-align: left;
@@ -304,16 +340,6 @@ input {
     margin: 4px;
     padding: 5px;
     color:rgb(12, 65, 73);
-}
-span#help {
-    cursor: pointer;
-}
-span#help:hover {
-    color:rgb(74, 136, 132) ;
-    text-shadow: 1px 1px 2px rgb(96, 86, 86);
-}
-span#help:active {
-    text-shadow: 0px 0px 2px rgb(96, 86, 86);
 }
 td.mt {
     background-color: rgb(255, 245, 213);
@@ -450,5 +476,8 @@ h2.h2x {
     color: rgb(25, 70, 62) ;
     text-align: center;
     text-shadow: 0px 0px 3px rgb(65, 79, 77);
+}
+input {
+    width: 200px;
 }
 </style>

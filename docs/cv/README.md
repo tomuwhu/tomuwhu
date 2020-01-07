@@ -40,12 +40,21 @@
 
 ### Szakmai tagságok
 
-- [CENTRAL-EUROPEAN JOURNAL OF NEW TECHNOLOGIES IN RESEARCH, EDUCATION AND PRACTICE](http://ojs.elte.hu/cejntrep/about/editorialTeam)
+- [CENTRAL-EUROPEAN JOURNAL OF NEW TECHNOLOGIES IN<br>RESEARCH, EDUCATION AND PRACTICE - International Editorial Board](http://ojs.elte.hu/cejntrep/about/editorialTeam)
+- [ACM Europe Council - Hungarian ACM Chapter](https://europe.acm.org/chapters)
 - [Magyar Operációkutatási Társaság](http://www.mot.org.hu/tarsasag/tagsag)
 - [MTA Köztestület](https://mta.hu/koztestuleti_tagok?PersonId=10048135)
   - Informatika- és Számítástudományi Bizottság
   - Szegedi Területi Bizottság
   - Informatikai Munkabizottság (szavazati jogú tag)
+- SZTE TTIK Tanárképzési bizottság (tag 2011-2014)
+- SZTE TTIK Oktatási bizottság (tag 2014-2017)
+- [SZTE TTIK Informatikai Intézet - Oktatási bizottság](https://www.inf.u-szeged.hu/intezet/bizottsagok/oktatasi-bizottsag)
+  - 2011 - 2014, tag
+  - 2014 - 2017, elnök
+  - 2019 - jelenleg, tag
+- [SZTE TTIK Informatikai Intézet - Hardver-szoftver Bizottság](https://www.inf.u-szeged.hu/intezet/bizottsagok/hardver-szoftver-bizottsag)
+  - 2011 - 2019, tag
 
 ### Végzettségek
 
