@@ -230,7 +230,7 @@ export default {
                 t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
                 t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
                 t.filter(v => v % 2).sort( ( a, b ) => b - a ).slice( 0, 5 ).reduce( ( o, v ) => o *= v, 1),
-                t.sort( ( a, b ) => b - a )[4]*t.sort( ( a, b ) => b - a )[6]
+                t.filter( v => v % 2 ).sort( (a, b) => b - a )[4]*t.filter( v => v % 2 ).sort( (a, b) => b - a )[6]
             ],
             mot: [],
             fe: '<b class="green">> </b>',
