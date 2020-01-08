@@ -138,7 +138,7 @@ export default {
             name: '', setname: '',
             fx: [
                 `Adott egy n szám ( <code>var n = ...</code> ).<br>
-                 Határozza mag a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
+                 Határozza meg a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
                 `Adott egy s string, határozza meg a hosszát (a karakterei számát)!`,
                 `Határozza meg s sting 13. karakterét!`,
                 `Adott egy t tömb ( <code>var t = [...]</code> ), határozza meg az elemszámát (t tömb hosszát)!`,
