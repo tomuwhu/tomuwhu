@@ -6,4 +6,7 @@
 
 [Prímteszt](https://hu.wikipedia.org/wiki/Pr%C3%ADmteszt)
 
+![ULAP Spirál](/p2.png)
+
+
 [Érettségi feladatsorok](/ef.html)
