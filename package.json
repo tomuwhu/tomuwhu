@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "vuepress": "^1.2.0"
   },
   "devDependencies": {},

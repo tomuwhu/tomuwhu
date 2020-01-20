@@ -1,17 +1,33 @@
 <template>
     <div>
+        <canvas id="myChart"></canvas>
         <table>
             <tr v-for="row in t">
                 <th>"{{row[0]}}"</th>
                 <td>{{row[1]}}</td>
-                <td>{{( 100*row[1]/n ).toFixed()}}%</td>
+                <td>{{( 100*row[1]/n ).toFixed(2)}}%</td>
             </tr>
         </table>
     </div>
 </template>
 
 <script>
+import Chart from 'chart.js'
 import szoveg from 'raw-loader!../public/emberijogok.txt'
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
+    options: {}
+})
 var map = new Map
 szoveg.toLowerCase().split('').forEach( v => {
                 if ( map.has( v ) ) {
@@ -21,7 +37,6 @@ szoveg.toLowerCase().split('').forEach( v => {
                 }
             })
 var cucc = Array.from( map )
-//var szoveg="cica"
 export default {
     data() {
         return {
