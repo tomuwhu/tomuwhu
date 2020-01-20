@@ -14,7 +14,7 @@
 
 <script>
 import Chart from 'chart.js'
-import szoveg from 'raw-loader!../public/toldi.txt'
+import szoveg from 'raw-loader!../public/aranyember.txt'
 var map = new Map
 var rc = (a) => `rgba(${
     Math.round(Math.random()*215)
