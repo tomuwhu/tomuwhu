@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input ref="mf" @change="f()" type="file">
+        <input class="fu" ref="mf" @change="f()" type="file">
         <select v-model="enc">
             <option>UTF-8</option>
             <option>ISO-8859-2</option>
@@ -52,7 +52,7 @@ function draw() {
         data: {
             labels: cucc.slice(0,20).map(v => `“${ v[0] }”`),
             datasets: [{
-                label: `% of Letters (${n})`,
+                label: `% of Letters (100*x/${n})`,
                 data: cucc.slice(0,20).map(v => Math.round(10000*v[1]/n)/100),
                 backgroundColor: Array(25).fill(0).map( () => rc(0.2)),
                 borderColor:  rc(1),
@@ -108,6 +108,12 @@ export default {
 </script>>
 
 <style>
+input.fu {
+    width: 500px;
+    border: solid 1px rgb(89, 82, 82);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgb(93, 103, 100);
+}
 div.x {
     cursor: pointer;
     text-align: center;
