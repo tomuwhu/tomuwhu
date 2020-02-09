@@ -1,5 +1,12 @@
 # Példaprogramocskák
 
+- [Form2Chart!!](/pp/Form2Chart.html)
+- [Diagramok és Gráfok vizualizációja](/pp/ChartJS.html)
+- [Aktív diagramok](/pp/Chart2.html)
+- [Fájl beolvasás](/pp/FileReader.html)
+- [Fájl generálás](/pp/FileWriter.html)
+- [Hang-generátor](/pp/Hg.html)
+
 | Futtatás | Forrás |
 | --- | --- |
 | [Körmozgás animáció](/pp/km.html) | [Körmozgás animáció forrás](/pp/km_src.html) |
