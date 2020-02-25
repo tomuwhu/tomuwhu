@@ -13,7 +13,9 @@
     "vis-network": "^7.3.3",
     "vuepress": "^1.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "vuepress-plugin-minimal-analytics": "^0.1.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

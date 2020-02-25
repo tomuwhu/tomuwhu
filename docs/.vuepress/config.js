@@ -37,7 +37,10 @@ module.exports = {
         }
       }
     },
-    plugins: [ 'latex' ],
+    plugins: [ 
+      'latex',
+      ['minimal-analytics', {ga: 'UA-159037546-1'}]
+    ],
     markdown: {
       toc: { includeLevel: [2, 3] },
       lineNumbers: true,

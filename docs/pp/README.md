@@ -5,7 +5,6 @@
 - [Aktív diagramok](/pp/Chart2.html)
 - [Fájl beolvasás](/pp/FileReader.html)
 - [Fájl generálás](/pp/FileWriter.html)
-- [Hang-generátor](/pp/Hg.html)
 
 | Futtatás | Forrás |
 | --- | --- |
