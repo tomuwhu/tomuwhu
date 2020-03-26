@@ -94,7 +94,7 @@
 
 <script>
 var sec = 60000, myf, mox, mp = 0, mpt, nt,
-    t = Array( 27 + Math.round(Math.random()*18) ).fill( 0 ).map( () =>Math.round( Math.random() * 88 ) ),
+    t = Array( 27 + Math.round(Math.random()*18) ).fill( 0 ).map( () => Math.round( Math.random() * 88 ) ),
     ts = `[${ t.toString() }]`,
     s = [
             "Bőszájú körülíróművész.",
@@ -130,7 +130,8 @@ var sec = 60000, myf, mox, mp = 0, mpt, nt,
             "Zártkörű nőújító ülés (TSL16b)",
             "Szélütött űrújságírónő"
         ][ Math.trunc( Math.random()*32 ) ],
-    ss= `'${ s }'`, n = Math.trunc( Math.random()*13432+2341 )
+    ss= `'${ s }'`, n = Math.round( Math.random()*13432+2341 )/1000
+var rng = [2,4,7,9,10,11,14,17,19,21,24,27], rn = rng[ Math.trunc( Math.random()*12) ]
 export default { 
     data() { 
         return {
@@ -138,51 +139,49 @@ export default {
             name: '', setname: '',
             fx: [
                 `Adott egy n szám ( <code>var n = ...</code> ).<br>
-                 Határozza meg a <big>𝜋</big>-szeresét 2 tizedesjegyre kerekítve!`,
-                `Adott egy s string, határozza meg a hosszát (a karakterei számát)!`,
-                `Határozza meg s sting 13. karakterét!`,
-                `Adott egy t tömb ( <code>var t = [...]</code> ), határozza meg az elemszámát (t tömb hosszát)!`,
-                `Határozza meg a t tömb 2. elemét!<br>(A tömb 1. eleme: <code>t[0]</code> )`,
-                `Határozza meg s string szavainak számát!`,
+                 Határozza meg a <big>${ rn }</big>-szeresét 2 tizedesjegyre kerekítve!`,
+                `Adott egy s string, határozza meg a ${ rn }. karakterét!`,
+                `Adott egy s string szavainak számát!`,
+                `Határozza meg a t tömb ${ rn }. eleme értékének ${ rn }-szeresét!<br>(A tömb 1. eleme: <code>t[0]</code> )`,
                 `Határozza meg a t tömbben a páratlan számok elemszámát!`,
                 `Határozza meg a t tömb elemeinek összegét!`,
                 `Határozza meg a t tömbben a páratlan értékű elemek összegét!`,
                 `Határozza meg a t tömbben a maximális elem értékét!`,
                 `Határozza meg a t tömbben a 7-tel osztható számok közül a legnagyobbat!`,
-                `Határozza meg a t tömbben az első 8 elem összegét!`,
-                `Határozza meg a t tömbben a legnagyobb 8 elem összegét!`,
-                `Határozza meg a t tömbben az 5 legnagyobb, 2-vel osztható szám szorzatát!`,
-                `Határozza meg a t tömbben az 5. és 7. legnagyobb páratlan szám szorzatát!`
+                `Határozza meg a t tömbben az első ${ rn } elem összegét!`,
+                `Határozza meg a t tömbben a legnagyobb ${ rn } elem összegét!`,
+                `Határozza meg a t tömbben az ${ rn } legnagyobb, 2-vel osztható szám szorzatát!`,
+                `Határozza meg a t tömbben az ${ rn-1 }. és ${ rn }. legnagyobb páratlan szám szorzatát!`
             ],
             hint: [
-                { texts: ['Math.PI', 'Number.toFixed'],
+                { texts: ['Number.toFixed'],
                   links: [
-                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI',
                       'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed'
                   ] },
-                { texts: ['String length'],
-                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
                 { texts: ['String charAt'],
                   links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String/charAt'] },
-                { texts: ['Array length'],
-                  links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length'] },
-                { texts: ['JS Array'],
-                  links: ['https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/Array'] },
-                { texts: ['String split'],
+                { texts: ['String split', 'String length'],
                   links: [
-                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split'
+                      'https://developer.mozilla.org/hu/docs/Web/JavaScript/Reference/Global_Objects/String',
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length'
+                  ] },
+                { texts: ['JS Array'],
+                  links: [
+                      'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array'
                   ] },
                 { texts: ['Array filter', '%-operator'],
                   links: [
                     'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
                     'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder'
                   ] },
-                { texts: ['Array reduce', '%-operator'],
-                  links: [
-                    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce',
-                    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder'] },
                 { texts: ['Array reduce'],
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'] },
+                { texts: ['Array filter', '%-operator', 'Array reduce'],
+                  links: [
+                    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter',
+                    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder',
+                    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce'
+                  ] },
                 { texts: ['Array reduce','Math.max'],
                   links: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce',
                           'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max'] },
@@ -213,24 +212,19 @@ export default {
             ],
             x: [],
             xhelp: [
-                '( Math.PI * 2 * n ).toFixed( 12 )', 's[12] + s.length', 's[12] + s.length',
-                't[2] + t.length', 't[2] + t.length', `s.split('á').length`,
-                't.filter( v => v == 2 )', 't.reduce( ( o, v ) => o += v + 1, 0)',
-                't.reduce( ( o, v ) => o += v % 2 ? v : 1, 1)', 'Math.min( ...t )',
-                'Math.max( ...t.filter( v => !(v % 2) ) )', 
-                't.slice( 0, 4 )\n .reduce( ( o, v ) => o += v + 1, 0)',
-                `t .sort  ( ( a, b ) => a - b )\n  .slice (   0, 4 )\n  .reduce( ( o, v ) => o += 1, 0)`,
-                `t.`, `t.`
+                '( 2 * n ).toFixed( 1 )', 's[12]', `s.split(' ')`, 't[4]',`t.filter( v => true )`,
+                '', '', '', '',
+                '', '', ``, ``, ``
             ],
             mo: [
-                (Math.PI * n).toFixed(2), s.length, s[12], t.length, t[1], s.split(" ").length,
+                (rn * n).toFixed(2), s[rn-1], s.split(" ").length, t[rn-1]*rn,
                 t.filter( v => v % 2).length,  t.reduce( ( o, v ) => o += v, 0),
                 t.reduce( ( o, v ) => o += v % 2 ? v : 0, 0),
                 Math.max( ...t ), Math.max( ...t.filter(v => !(v % 7) ) ),
-                t.slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                t.sort( ( a, b ) => b - a ).slice( 0, 8 ).reduce( ( o, v ) => o += v, 0),
-                t.filter(v => v % 2).sort( ( a, b ) => b - a ).slice( 0, 5 ).reduce( ( o, v ) => o *= v, 1),
-                t.filter( v => v % 2 ).sort( (a, b) => b - a )[4]*t.filter( v => v % 2 ).sort( (a, b) => b - a )[6]
+                t.slice( 0, rn ).reduce( ( o, v ) => o += v, 0),
+                t.sort( ( a, b ) => b - a ).slice( 0, rn ).reduce( ( o, v ) => o += v, 0),
+                t.filter(v => v % 2).sort( ( a, b ) => b - a ).slice( 0, rn ).reduce( ( o, v ) => o *= v, 1),
+                t.filter( v => v % 2 ).sort( (a, b) => b - a )[rn-2]*t.filter( v => v % 2 ).sort( (a, b) => b - a )[rn-1]
             ],
             mot: [],
             fe: '<b class="green">> </b>',
