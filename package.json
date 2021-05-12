@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "npm": "^6.13.7",
     "vis": "^4.21.0-EOL",
     "vis-network": "^7.3.3",
